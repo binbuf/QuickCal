@@ -1,0 +1,444 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01B2007F03A25AF229B9B5D5 /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9C67E1DCCA787BE469711 /* CalendarEvent.swift */; };
+		0865E1EE7A827855107E9FA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C8C1916DB2F9A750EF5A84 /* AppDelegate.swift */; };
+		0F884F247DB8BE2862679C9E /* UninstallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1232450F56DD4157C98D0E /* UninstallManager.swift */; };
+		1DEC1D87669B852879ED0805 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A2FE4EA26738238795E814 /* OnboardingView.swift */; };
+		3F2954A9E05A5A2531FDC658 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA99A8BB8DE9F3C8FCE5BBB0 /* CalendarViewModel.swift */; };
+		436645B581A3AED3953C5D70 /* EventStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA28209B1A287104152B5B0 /* EventStoreManager.swift */; };
+		68E726C029F1EA336D7B8369 /* DayCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87114DA35E602B18180D939 /* DayCellView.swift */; };
+		76ABDBF5A1522F6DE5536FDE /* CalendarFlyoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C57C708E102242F0193A1C /* CalendarFlyoutView.swift */; };
+		7EE0D0E3E28A599611757057 /* CalendarFlyoutPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9862B25077F475D75F9DF1 /* CalendarFlyoutPanel.swift */; };
+		8951AFD9E210F31F4F277CDF /* QuickCalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA107872FEE90FF676F29F7C /* QuickCalApp.swift */; };
+		8ABF0162217AE9C4EA5347A3 /* DecadePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C9AA7590714269B14AC9D5 /* DecadePickerView.swift */; };
+		8EDA02DBC2171280690BF3D2 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609B8BAED29F8FD4A13347BF /* CalendarHeaderView.swift */; };
+		9F6E20D23D760BC62B34634A /* MonthGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56881F633B96754A0D3FEB3 /* MonthGridView.swift */; };
+		A5C983CE5A15FB570749B2AD /* ClockPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0957801C766BB6EBDBB9A2E7 /* ClockPreferences.swift */; };
+		B44E5247FF8DD1B29B27E247 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654EEBF77DB2CFE38FFEF9A0 /* AppState.swift */; };
+		B6004CC62B795FC33205C826 /* LaunchAtLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977526146285E41FBE0B0363 /* LaunchAtLoginManager.swift */; };
+		BC97CBC913EFE792A071C70B /* AgendaListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A1E5EEF04BF188CCFEE6F6 /* AgendaListView.swift */; };
+		D9BE44C2D678A7DE561F7598 /* ClockStatusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06AC743F811521FAC1A48F /* ClockStatusItem.swift */; };
+		DA83227C1D8E6474209D8867 /* MonthPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451692438DAC8DB807EAF795 /* MonthPickerView.swift */; };
+		E241F40FA89B4894DAC99131 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19208FA75B63790F4CBE964A /* Assets.xcassets */; };
+		F11EFFCF7399849B85BD42C6 /* OnboardingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB07EBA7B19D8374F7112E0 /* OnboardingWindow.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		08A9C67E1DCCA787BE469711 /* CalendarEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
+		0957801C766BB6EBDBB9A2E7 /* ClockPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockPreferences.swift; sourceTree = "<group>"; };
+		10C9AA7590714269B14AC9D5 /* DecadePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecadePickerView.swift; sourceTree = "<group>"; };
+		19208FA75B63790F4CBE964A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		23A2FE4EA26738238795E814 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		33C8C1916DB2F9A750EF5A84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		451692438DAC8DB807EAF795 /* MonthPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthPickerView.swift; sourceTree = "<group>"; };
+		47C57C708E102242F0193A1C /* CalendarFlyoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFlyoutView.swift; sourceTree = "<group>"; };
+		4FA28209B1A287104152B5B0 /* EventStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStoreManager.swift; sourceTree = "<group>"; };
+		5D62EF2ADA4FC3938B8BD70A /* QuickCal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickCal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		609B8BAED29F8FD4A13347BF /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
+		654EEBF77DB2CFE38FFEF9A0 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		977526146285E41FBE0B0363 /* LaunchAtLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginManager.swift; sourceTree = "<group>"; };
+		9F9862B25077F475D75F9DF1 /* CalendarFlyoutPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFlyoutPanel.swift; sourceTree = "<group>"; };
+		AA107872FEE90FF676F29F7C /* QuickCalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickCalApp.swift; sourceTree = "<group>"; };
+		AA1232450F56DD4157C98D0E /* UninstallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UninstallManager.swift; sourceTree = "<group>"; };
+		C9A1E5EEF04BF188CCFEE6F6 /* AgendaListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaListView.swift; sourceTree = "<group>"; };
+		D87114DA35E602B18180D939 /* DayCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellView.swift; sourceTree = "<group>"; };
+		DA99A8BB8DE9F3C8FCE5BBB0 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		E56881F633B96754A0D3FEB3 /* MonthGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthGridView.swift; sourceTree = "<group>"; };
+		EEB07EBA7B19D8374F7112E0 /* OnboardingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWindow.swift; sourceTree = "<group>"; };
+		FA06AC743F811521FAC1A48F /* ClockStatusItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockStatusItem.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0334F22E0C555A0EB646E38C /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				23A2FE4EA26738238795E814 /* OnboardingView.swift */,
+				EEB07EBA7B19D8374F7112E0 /* OnboardingWindow.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		08814CC732BC5B6B73B0A2C1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5D62EF2ADA4FC3938B8BD70A /* QuickCal.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0E9886634C7A8B6162F1F8E6 /* AutoStart */ = {
+			isa = PBXGroup;
+			children = (
+				977526146285E41FBE0B0363 /* LaunchAtLoginManager.swift */,
+			);
+			path = AutoStart;
+			sourceTree = "<group>";
+		};
+		1699B31B4857795B967FAC23 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				C9A1E5EEF04BF188CCFEE6F6 /* AgendaListView.swift */,
+				9F9862B25077F475D75F9DF1 /* CalendarFlyoutPanel.swift */,
+				47C57C708E102242F0193A1C /* CalendarFlyoutView.swift */,
+				609B8BAED29F8FD4A13347BF /* CalendarHeaderView.swift */,
+				DA99A8BB8DE9F3C8FCE5BBB0 /* CalendarViewModel.swift */,
+				D87114DA35E602B18180D939 /* DayCellView.swift */,
+				10C9AA7590714269B14AC9D5 /* DecadePickerView.swift */,
+				E56881F633B96754A0D3FEB3 /* MonthGridView.swift */,
+				451692438DAC8DB807EAF795 /* MonthPickerView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		330C2BD448871E8414DFB98A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				33C8C1916DB2F9A750EF5A84 /* AppDelegate.swift */,
+				654EEBF77DB2CFE38FFEF9A0 /* AppState.swift */,
+				AA107872FEE90FF676F29F7C /* QuickCalApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		3CE3794AB9EFC5129311BC0D /* Clock */ = {
+			isa = PBXGroup;
+			children = (
+				0957801C766BB6EBDBB9A2E7 /* ClockPreferences.swift */,
+				FA06AC743F811521FAC1A48F /* ClockStatusItem.swift */,
+			);
+			path = Clock;
+			sourceTree = "<group>";
+		};
+		4060DE3D6813D8E549A605BB /* QuickCal */ = {
+			isa = PBXGroup;
+			children = (
+				330C2BD448871E8414DFB98A /* App */,
+				0E9886634C7A8B6162F1F8E6 /* AutoStart */,
+				1699B31B4857795B967FAC23 /* Calendar */,
+				3CE3794AB9EFC5129311BC0D /* Clock */,
+				8826EBEF0A371991B5C00227 /* EventKit */,
+				0334F22E0C555A0EB646E38C /* Onboarding */,
+				FCD023C985E9B7344A41D870 /* Resources */,
+				CC28F4E8DCDA942DBD33A2C6 /* Uninstaller */,
+			);
+			path = QuickCal;
+			sourceTree = "<group>";
+		};
+		8826EBEF0A371991B5C00227 /* EventKit */ = {
+			isa = PBXGroup;
+			children = (
+				08A9C67E1DCCA787BE469711 /* CalendarEvent.swift */,
+				4FA28209B1A287104152B5B0 /* EventStoreManager.swift */,
+			);
+			path = EventKit;
+			sourceTree = "<group>";
+		};
+		CC28F4E8DCDA942DBD33A2C6 /* Uninstaller */ = {
+			isa = PBXGroup;
+			children = (
+				AA1232450F56DD4157C98D0E /* UninstallManager.swift */,
+			);
+			path = Uninstaller;
+			sourceTree = "<group>";
+		};
+		EFFEB7E0874594C01C2F08D8 = {
+			isa = PBXGroup;
+			children = (
+				4060DE3D6813D8E549A605BB /* QuickCal */,
+				08814CC732BC5B6B73B0A2C1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FCD023C985E9B7344A41D870 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				19208FA75B63790F4CBE964A /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D0B7D806D0AE3389A104B3FD /* QuickCal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30AB1B4547ACE596C2CB6452 /* Build configuration list for PBXNativeTarget "QuickCal" */;
+			buildPhases = (
+				9FE6930C5FC193D12D03C431 /* Sources */,
+				280E4AD9A0DE4789AFB2655B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuickCal;
+			packageProductDependencies = (
+			);
+			productName = QuickCal;
+			productReference = 5D62EF2ADA4FC3938B8BD70A /* QuickCal.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F0CB1A40B97CBF58800CBCA7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2640;
+				TargetAttributes = {
+					D0B7D806D0AE3389A104B3FD = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = E0646B3D669288F17152F50D /* Build configuration list for PBXProject "QuickCal" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = EFFEB7E0874594C01C2F08D8;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 08814CC732BC5B6B73B0A2C1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D0B7D806D0AE3389A104B3FD /* QuickCal */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		280E4AD9A0DE4789AFB2655B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E241F40FA89B4894DAC99131 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9FE6930C5FC193D12D03C431 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC97CBC913EFE792A071C70B /* AgendaListView.swift in Sources */,
+				0865E1EE7A827855107E9FA0 /* AppDelegate.swift in Sources */,
+				B44E5247FF8DD1B29B27E247 /* AppState.swift in Sources */,
+				01B2007F03A25AF229B9B5D5 /* CalendarEvent.swift in Sources */,
+				7EE0D0E3E28A599611757057 /* CalendarFlyoutPanel.swift in Sources */,
+				76ABDBF5A1522F6DE5536FDE /* CalendarFlyoutView.swift in Sources */,
+				8EDA02DBC2171280690BF3D2 /* CalendarHeaderView.swift in Sources */,
+				3F2954A9E05A5A2531FDC658 /* CalendarViewModel.swift in Sources */,
+				A5C983CE5A15FB570749B2AD /* ClockPreferences.swift in Sources */,
+				D9BE44C2D678A7DE561F7598 /* ClockStatusItem.swift in Sources */,
+				68E726C029F1EA336D7B8369 /* DayCellView.swift in Sources */,
+				8ABF0162217AE9C4EA5347A3 /* DecadePickerView.swift in Sources */,
+				436645B581A3AED3953C5D70 /* EventStoreManager.swift in Sources */,
+				B6004CC62B795FC33205C826 /* LaunchAtLoginManager.swift in Sources */,
+				9F6E20D23D760BC62B34634A /* MonthGridView.swift in Sources */,
+				DA83227C1D8E6474209D8867 /* MonthPickerView.swift in Sources */,
+				1DEC1D87669B852879ED0805 /* OnboardingView.swift in Sources */,
+				F11EFFCF7399849B85BD42C6 /* OnboardingWindow.swift in Sources */,
+				8951AFD9E210F31F4F277CDF /* QuickCalApp.swift in Sources */,
+				0F884F247DB8BE2862679C9E /* UninstallManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		307840746CE3BC554652727B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = QuickCal/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		83A6990421C884796154CD70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = QuickCal/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D88EA729CBA9D9CA9B64B3ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = QuickCal/QuickCal.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = QuickCal/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.binbuf.QuickCal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6;
+			};
+			name = Debug;
+		};
+		F679BD541703AF3781ADEE35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = QuickCal/QuickCal.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = QuickCal/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.binbuf.QuickCal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		30AB1B4547ACE596C2CB6452 /* Build configuration list for PBXNativeTarget "QuickCal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83A6990421C884796154CD70 /* Debug */,
+				307840746CE3BC554652727B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E0646B3D669288F17152F50D /* Build configuration list for PBXProject "QuickCal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D88EA729CBA9D9CA9B64B3ED /* Debug */,
+				F679BD541703AF3781ADEE35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F0CB1A40B97CBF58800CBCA7 /* Project object */;
+}

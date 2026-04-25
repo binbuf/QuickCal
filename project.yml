@@ -1,0 +1,37 @@
+name: QuickCal
+options:
+  bundleIdPrefix: com.binbuf
+  deploymentTarget:
+    macOS: "26.0"
+  xcodeVersion: "26.4"
+  createIntermediateGroups: true
+  defaultConfig: Debug
+
+settings:
+  base:
+    SWIFT_VERSION: "6"
+    MACOSX_DEPLOYMENT_TARGET: "26.0"
+    CODE_SIGN_IDENTITY: "-"
+    CODE_SIGN_STYLE: Automatic
+    PRODUCT_BUNDLE_IDENTIFIER: com.binbuf.QuickCal
+    INFOPLIST_FILE: QuickCal/Info.plist
+    CODE_SIGN_ENTITLEMENTS: QuickCal/QuickCal.entitlements
+    ENABLE_HARDENED_RUNTIME: false
+    SWIFT_STRICT_CONCURRENCY: complete
+
+targets:
+  QuickCal:
+    type: application
+    platform: macOS
+    sources:
+      - path: QuickCal
+        excludes:
+          - "**/*.entitlements"
+          - Info.plist
+    settings:
+      base:
+        LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../Frameworks"
+        COMBINE_HIDPI_IMAGES: true
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: false
+    dependencies: []
