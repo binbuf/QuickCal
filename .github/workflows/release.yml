@@ -1,0 +1,144 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to build (e.g. v1.2.3). Used for dry runs without pushing a tag."
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build and release QuickCal
+    runs-on: macos-26
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve version
+        id: version
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            REF="${{ inputs.tag }}"
+          else
+            REF="${GITHUB_REF_NAME}"
+          fi
+          VERSION="${REF#v}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$REF"         >> "$GITHUB_OUTPUT"
+          echo "Resolved version: $VERSION (tag $REF)"
+
+      - name: Select Xcode 26.4
+        run: |
+          set -euo pipefail
+          sudo xcode-select -s /Applications/Xcode_26.4.app/Contents/Developer
+          xcodebuild -version
+
+      - name: Install build tools
+        run: |
+          set -euo pipefail
+          brew update
+          brew install xcodegen create-dmg
+
+      - name: Patch Info.plist with release version
+        run: |
+          set -euo pipefail
+          VERSION="${{ steps.version.outputs.version }}"
+          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" QuickCal/Info.plist
+          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $VERSION"            QuickCal/Info.plist
+          /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString"        QuickCal/Info.plist
+          /usr/libexec/PlistBuddy -c "Print :CFBundleVersion"                   QuickCal/Info.plist
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build QuickCal.app (arm64, ad-hoc signed)
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -project QuickCal.xcodeproj \
+            -scheme QuickCal \
+            -configuration Release \
+            -derivedDataPath build \
+            ARCHS=arm64 \
+            ONLY_ACTIVE_ARCH=NO \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Verify build output
+        run: |
+          set -euo pipefail
+          APP="build/Build/Products/Release/QuickCal.app"
+          test -d "$APP" || { echo "Missing $APP"; exit 1; }
+          /usr/bin/codesign -dv "$APP" 2>&1 | head -20 || true
+          /usr/bin/lipo -archs "$APP/Contents/MacOS/QuickCal"
+
+      - name: Create DMG
+        id: dmg
+        run: |
+          set -euo pipefail
+          VERSION="${{ steps.version.outputs.version }}"
+          DMG="QuickCal-${VERSION}-arm64.dmg"
+          STAGE="$(mktemp -d)"
+          cp -R "build/Build/Products/Release/QuickCal.app" "$STAGE/"
+          create-dmg \
+            --volname "QuickCal ${VERSION}" \
+            --window-pos 200 120 \
+            --window-size 600 400 \
+            --icon-size 100 \
+            --icon "QuickCal.app" 175 190 \
+            --hide-extension "QuickCal.app" \
+            --app-drop-link 425 190 \
+            --no-internet-enable \
+            "$DMG" \
+            "$STAGE"
+          ls -lh "$DMG"
+          shasum -a 256 "$DMG" | tee "${DMG}.sha256"
+          echo "dmg=$DMG"            >> "$GITHUB_OUTPUT"
+          echo "sha=${DMG}.sha256"   >> "$GITHUB_OUTPUT"
+
+      - name: Publish GitHub Release
+        if: github.event_name == 'push'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: ${{ steps.version.outputs.tag }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          body: |
+            QuickCal ${{ steps.version.outputs.version }}
+
+            Status-bar macOS app. Ad-hoc signed; on first launch run:
+
+                xattr -dr com.apple.quarantine /Applications/QuickCal.app
+
+            SHA-256 checksum is in the attached `.sha256` file.
+          files: |
+            ${{ steps.dmg.outputs.dmg }}
+            ${{ steps.dmg.outputs.sha }}
+
+      - name: Upload artifacts (workflow_dispatch dry run)
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: QuickCal-${{ steps.version.outputs.version }}-arm64
+          path: |
+            ${{ steps.dmg.outputs.dmg }}
+            ${{ steps.dmg.outputs.sha }}
+          if-no-files-found: error
