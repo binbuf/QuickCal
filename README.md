@@ -1,6 +1,6 @@
 # QuickCal
 
-A macOS menu bar app that replaces the system clock with a Windows 11-style calendar flyout — click the time to get a full month calendar with your agenda. Built with SwiftUI and AppKit, targeting macOS 26 (Tahoe).
+A macOS menu bar app that replaces the system clock with a calendar flyout. Click the icon or time to get a full month calendar with your agenda. Built with SwiftUI and AppKit, targeting macOS 26 (Tahoe).
 
 ## Prerequisites
 
