@@ -1,8 +1,10 @@
+import AppKit
 import SwiftUI
 import EventKit
 
 struct CalendarEvent: Identifiable {
     let id: String
+    let calendarItemIdentifier: String
     let title: String
     let startDate: Date
     let endDate: Date
@@ -11,7 +13,8 @@ struct CalendarEvent: Identifiable {
     let calendarTitle: String
 
     init(from ekEvent: EKEvent) {
-        self.id = ekEvent.eventIdentifier ?? UUID().uuidString
+        self.calendarItemIdentifier = ekEvent.calendarItemIdentifier
+        self.id = ekEvent.eventIdentifier ?? ekEvent.calendarItemIdentifier
         self.title = ekEvent.title ?? "Untitled"
         self.startDate = ekEvent.startDate
         self.endDate = ekEvent.endDate
@@ -22,6 +25,14 @@ struct CalendarEvent: Identifiable {
         } else {
             self.calendarColor = .accentColor
         }
+    }
+
+    /// Open Calendar.app and reveal this event. Uses the long-standing (undocumented)
+    /// `ical://ekevent/<calendarItemIdentifier>` URL scheme. Failure is silent — Calendar.app
+    /// just opens to today.
+    func revealInCalendarApp() {
+        guard let url = URL(string: "ical://ekevent/\(calendarItemIdentifier)?method=show&options=more") else { return }
+        NSWorkspace.shared.open(url)
     }
 
     var timeString: String {

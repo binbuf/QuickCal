@@ -29,7 +29,7 @@ struct CalendarFlyoutView: View {
                 .padding(.top, 4)
 
             AgendaListView(date: appState.selectedDate, eventStore: eventStore)
-                .frame(maxHeight: 180)
+                .frame(maxHeight: 108)
                 .padding(.bottom, 12)
         }
         .frame(width: 340)

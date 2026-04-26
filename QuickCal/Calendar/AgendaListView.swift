@@ -51,5 +51,8 @@ struct AgendaListView: View {
         .padding(.horizontal, 20)
         .padding(.vertical, 4)
         .contentShape(Rectangle())
+        .onTapGesture(count: 2) {
+            event.revealInCalendarApp()
+        }
     }
 }

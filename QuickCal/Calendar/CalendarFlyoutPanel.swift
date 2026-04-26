@@ -7,7 +7,7 @@ final class CalendarFlyoutPanel: NSPanel {
 
     init() {
         super.init(
-            contentRect: NSRect(x: 0, y: 0, width: 340, height: 620),
+            contentRect: NSRect(x: 0, y: 0, width: 340, height: 548),
             styleMask: [.borderless, .nonactivatingPanel],
             backing: .buffered,
             defer: true

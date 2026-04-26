@@ -46,6 +46,10 @@ From the DMG: double-click `Scripts/uninstall-quickcal.command`
 
 Both methods remove the overlay, login item, Accessibility permission, and all preferences.
 
+## Credits
+
+App icon: [Calendar icon](https://www.flaticon.com/free-icon/calendar_3842121) by Flaticon.
+
 ## Project Structure
 
 ```
