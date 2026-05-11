@@ -57,6 +57,9 @@ struct MonthGridView: View {
             viewModel.displayedMonth = newValue
             fetchEvents()
         }
+        .onChange(of: appState.selectedDate) { _, newValue in
+            viewModel.selectedDate = newValue
+        }
     }
 
     private var dayOfWeekHeaders: some View {

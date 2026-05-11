@@ -83,6 +83,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
               let button = clockStatusItem?.statusItem.button,
               let buttonWindow = button.window else { return }
 
+        // Reset state to current date
+        let now = Date()
+        appState.selectedDate = now
+        appState.displayedMonth = Calendar.current.date(
+            from: Calendar.current.dateComponents([.year, .month], from: now)
+        )!
+        appState.viewMode = .day
+
         if let eventStore = eventStoreManager {
             eventStore.fetchEvents(for: appState.displayedMonth)
         }
