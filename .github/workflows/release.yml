@@ -64,7 +64,7 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
-      - name: Build QuickCal.app (arm64, ad-hoc signed)
+      - name: Build QuickCal.app (Apple Silicon, ad-hoc signed)
         run: |
           set -euo pipefail
           xcodebuild \
@@ -92,7 +92,7 @@ jobs:
         run: |
           set -euo pipefail
           VERSION="${{ steps.version.outputs.version }}"
-          DMG="QuickCal-${VERSION}-arm64.dmg"
+          DMG="QuickCal-${VERSION}-apple-silicon.dmg"
           STAGE="$(mktemp -d)"
           cp -R "build/Build/Products/Release/QuickCal.app" "$STAGE/"
           create-dmg \
@@ -137,7 +137,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
         with:
-          name: QuickCal-${{ steps.version.outputs.version }}-arm64
+          name: QuickCal-${{ steps.version.outputs.version }}-apple-silicon
           path: |
             ${{ steps.dmg.outputs.dmg }}
             ${{ steps.dmg.outputs.sha }}
