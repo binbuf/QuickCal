@@ -20,7 +20,7 @@ final class AppState {
 
     private static func loadClockMode() -> ClockMode {
         let raw = UserDefaults.standard.string(forKey: "clockMode") ?? ""
-        return ClockMode(rawValue: raw) ?? .analogCompanion
+        return ClockMode(rawValue: raw) ?? .calendarIcon
     }
 
     enum ViewMode: Equatable {

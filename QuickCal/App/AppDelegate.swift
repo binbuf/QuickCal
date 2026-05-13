@@ -220,6 +220,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
               let mode = AppState.ClockMode(rawValue: raw) else { return }
         appState.clockMode = mode
         clockStatusItem?.refresh()
+        if mode == .analogCompanion {
+            showAnalogTip()
+        }
+    }
+
+    private func showAnalogTip() {
+        let alert = NSAlert()
+        alert.messageText = "Tip: Use Analog Clock for the Best Experience"
+        alert.informativeText = "macOS doesn't allow hiding the system date/time or changing what happens when you click it. If you want a calendar to pop out when you click the menu bar clock, go to System Settings → Control Center → Clock and set the style to Analog."
+        alert.alertStyle = .informational
+        alert.addButton(withTitle: "Got It")
+        alert.runModal()
     }
 
     @objc private func toggleShowDate() {

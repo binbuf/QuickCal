@@ -48,9 +48,21 @@ struct CalendarFlyoutView: View {
                 .monospacedDigit()
                 .foregroundStyle(.primary)
 
-            Text(currentTime, format: .dateTime.weekday(.wide).month(.wide).day().year())
-                .font(.system(size: 13))
-                .foregroundStyle(.secondary)
+            Button {
+                let cal = Calendar.current
+                let isCurrentMonth = cal.isDate(appState.displayedMonth, equalTo: .now, toGranularity: .month)
+                if !isCurrentMonth {
+                    appState.displayedMonth = cal.date(
+                        from: cal.dateComponents([.year, .month], from: .now)
+                    )!
+                    appState.viewMode = .day
+                }
+            } label: {
+                Text(currentTime, format: .dateTime.weekday(.wide).month(.wide).day().year())
+                    .font(.system(size: 13))
+                    .foregroundStyle(.secondary)
+            }
+            .buttonStyle(.plain)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
