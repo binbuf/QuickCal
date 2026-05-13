@@ -1,16 +1,47 @@
 # QuickCal
 
-A macOS menu bar app that replaces the system clock with a calendar flyout. Click the icon or time to get a full month calendar with your agenda. Built with SwiftUI and AppKit, targeting macOS 26 (Tahoe).
+**Click your menu bar clock. Get a calendar.**
 
-## Prerequisites
+macOS has never shipped a calendar flyout — you click the clock and nothing happens. QuickCal fixes that. It puts a full month calendar with your agenda one click away, native to macOS, no subscription required.
 
-- macOS 26+
-- Xcode 26+
+![Calendar flyout showing month grid and agenda](https://github.com/binbuf/QuickCal/assets/placeholder/screenshot.png)
+
+## What it does
+
+- **Click** the menu bar icon → a smooth calendar flyout appears
+- **Month grid** with today highlighted and event dots on days with events
+- **Zoom out** by clicking the month/year header: Month → Decade → back
+- **Agenda strip** shows today's events pulled from your Apple Calendar
+- **Live clock** displayed in the flyout header, updates every second
+
+## Two modes — you pick
+
+macOS doesn't let third-party apps hide the system clock, so QuickCal offers two ways to fit into your menu bar:
+
+### Calendar Icon *(default)*
+A small `calendar` SF Symbol sits in your menu bar. Your system clock stays exactly as you have it. Clean, minimal, zero interference. Best if you just want the flyout without changing anything.
+
+### Analog Companion
+QuickCal replaces the system clock with its own **fully configurable digital readout** — 12/24h, seconds, day of week, date, flashing separators. You set the system clock style to **Analog** (a tiny clock face), which naturally takes up less space and recedes visually. QuickCal becomes your primary time display, and clicking it opens the flyout.
+
+> To enable Analog Companion: right-click the QuickCal clock → **Clock Style → Analog Companion**, then open **System Settings → Control Center → Clock Options** and set Style to Analog.
+
+The onboarding flow walks you through this automatically on first launch.
+
+## Requirements
+
+- macOS 26 (Tahoe) or later
+- Apple Silicon or Intel
+- Xcode 26+ (to build from source)
 - [xcodegen](https://github.com/yonaskolb/XcodeGen): `brew install xcodegen`
 
-## Build & Run
+## Install
+
+### From source
 
 ```bash
+git clone https://github.com/binbuf/QuickCal
+cd QuickCal
 make run        # generate project, build debug, launch
 ```
 
@@ -22,43 +53,53 @@ make build      # debug build
 make release    # release build → ./build/Build/Products/Release/QuickCal.app
 ```
 
-> **Note:** If `xcode-select -p` points to CommandLineTools instead of Xcode.app, the Makefile handles this automatically via `DEVELOPER_DIR`. To fix globally: `sudo xcode-select -s /Applications/Xcode.app/Contents/Developer`
+> If `xcode-select -p` points to CommandLineTools instead of Xcode.app, the Makefile handles this automatically. To fix it globally: `sudo xcode-select -s /Applications/Xcode.app/Contents/Developer`
 
-## First Launch
+## First launch
 
-1. QuickCal opens an onboarding window explaining the Accessibility permission requirement
-2. Click **Open Accessibility Settings** → toggle QuickCal on in System Settings
-3. The onboarding window detects the permission and shows **Get Started**
-4. QuickCal installs its clock in the menu bar, overlays the system clock, and is ready to use
+1. An onboarding window opens — read through the two mode options and pick one
+2. If you chose **Analog Companion**, a button opens Control Center settings directly
+3. Click **Get Started** → QuickCal installs itself in the menu bar and is ready
+
+No Accessibility permission required. No background agents. Just a status item.
 
 ## Usage
 
-- **Left-click** the menu bar clock → opens the calendar flyout
-- **Right-click** → context menu (Launch at Login, Uninstall, Quit)
-- **Arrow keys** navigate the calendar grid, **Escape** closes the flyout
-- Click the month/year header to zoom out (Day → Month → Decade), click a cell to zoom back in
+| Action | Result |
+|---|---|
+| Left-click the icon | Open/close calendar flyout |
+| Right-click the icon | Context menu (Clock Style, Launch at Login, Uninstall, Quit) |
+| Click the month/year header | Zoom out to month picker |
+| Click a month | Zoom out to decade picker |
+| Click a year or month cell | Zoom back in |
+| Arrow keys | Navigate the calendar grid |
+| Escape | Close the flyout |
+| Click the date subtitle | Jump back to today if you've navigated away |
 
 ## Uninstall
 
-From the app: right-click the clock → **Uninstall QuickCal**
+**From the app:** right-click the menu bar icon → **Uninstall QuickCal**
 
-From the DMG: double-click `Scripts/uninstall-quickcal.command`
+**From the terminal:**
+```bash
+open Scripts/uninstall-quickcal.command
+```
 
-Both methods remove the overlay, login item, Accessibility permission, and all preferences.
+Both methods remove the login item and all stored preferences.
 
-## Credits
-
-App icon: [Calendar icon](https://www.flaticon.com/free-icon/calendar_3842121) by Flaticon.
-
-## Project Structure
+## Project structure
 
 ```
 QuickCal/
   App/          @main entry, AppDelegate, shared state
-  Onboarding/   Accessibility permission flow
-  Clock/        Status item, clock prefs, AXUIElement overlay
-  Calendar/     Flyout panel, month grid, zoom views, agenda
-  EventKit/     Calendar event fetching
-  AutoStart/    SMAppService login item
+  Onboarding/   Mode picker + first-launch flow
+  Clock/        Status item, clock preferences, display rendering
+  Calendar/     Flyout panel, month grid, zoom views, agenda list
+  EventKit/     Apple Calendar event fetching via EventKit
+  AutoStart/    SMAppService login item management
   Uninstaller/  In-app + script-based removal
 ```
+
+## Credits
+
+App icon: [Calendar icon](https://www.flaticon.com/free-icon/calendar_3842121) by Flaticon.
