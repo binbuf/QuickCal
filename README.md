@@ -2,9 +2,9 @@
 
 **Click your menu bar clock. Get a calendar.**
 
-macOS has never shipped a calendar flyout — you click the clock and nothing happens. QuickCal fixes that. It puts a full month calendar with your agenda one click away, native to macOS, no subscription required.
+A tiny macOS menu bar calendar. Expands to a full month calendar with your agenda. Native calendar opens your events with one click away.
 
-![Calendar flyout showing month grid and agenda](https://github.com/binbuf/QuickCal/assets/placeholder/screenshot.png)
+![Calendar flyout showing month grid and agenda](docs/app.png)
 
 ## What it does
 
@@ -12,9 +12,9 @@ macOS has never shipped a calendar flyout — you click the clock and nothing ha
 - **Month grid** with today highlighted and event dots on days with events
 - **Zoom out** by clicking the month/year header: Month → Decade → back
 - **Agenda strip** shows today's events pulled from your Apple Calendar
-- **Live clock** displayed in the flyout header, updates every second
+- **Live clock** configurable to replace system clock, allowing clicking time to open calendar.
 
-## Two modes — you pick
+## Modes
 
 macOS doesn't let third-party apps hide the system clock, so QuickCal offers two ways to fit into your menu bar:
 

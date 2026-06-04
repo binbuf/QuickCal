@@ -7,7 +7,6 @@ final class ClockStatusItem {
     private let appState: AppState
     private let clickHandler: (NSEvent) -> Void
     private var updateTimer: Timer?
-    private var flashState: Bool = false
 
     private static let clockFont = NSFont.monospacedDigitSystemFont(
         ofSize: NSFont.systemFontSize,
@@ -43,6 +42,9 @@ final class ClockStatusItem {
 
     func refresh() {
         updateDisplay()
+        // Re-aim the timer so a freshly toggled flash setting picks up the
+        // half-second cadence (or drops back to one second) right away.
+        restartTimer()
     }
 
     /// Pre-seed `NSStatusItem Preferred Position <autosaveName>` to 0 on first
@@ -66,30 +68,52 @@ final class ClockStatusItem {
     }
 
     private func startTimer() {
-        updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+        scheduleNextTick()
+    }
+
+    private func restartTimer() {
+        updateTimer?.invalidate()
+        scheduleNextTick()
+    }
+
+    /// Schedule a one-shot timer for the next wall-clock boundary — a half-second
+    /// while flashing the separators, otherwise a whole second — and reschedule
+    /// after each fire. Re-aiming at the boundary every tick keeps us aligned with
+    /// the OS clock instead of drifting from an arbitrary launch offset, the way a
+    /// fixed repeating timer would.
+    private func scheduleNextTick() {
+        let flashing = appState.clockMode == .analogCompanion && preferences.flashDateSeparators
+        let interval: TimeInterval = flashing ? 0.5 : 1.0
+        let now = Date().timeIntervalSinceReferenceDate
+        var next = (now / interval).rounded(.down) * interval
+        if next <= now { next += interval }
+        let fireDate = Date(timeIntervalSinceReferenceDate: next)
+        let timer = Timer(fire: fireDate, interval: 0, repeats: false) { [weak self] _ in
             Task { @MainActor in
-                self?.tick()
+                self?.tick(at: fireDate)
             }
         }
+        RunLoop.main.add(timer, forMode: .common)
+        updateTimer = timer
     }
 
-    private func tick() {
-        flashState.toggle()
-        updateDisplay()
+    private func tick(at date: Date) {
+        updateDisplay(at: date)
+        scheduleNextTick()
     }
 
-    private func updateDisplay() {
+    private func updateDisplay(at date: Date = Date()) {
         switch appState.clockMode {
         case .analogCompanion:
-            renderTime()
+            renderTime(at: date)
         case .calendarIcon:
             renderIcon()
         }
     }
 
-    private func renderTime() {
+    private func renderTime(at date: Date) {
         guard let button = statusItem.button else { return }
-        let (text, hideColons) = preferences.formattedTime(flashState: flashState)
+        let (text, hideColons) = preferences.formattedTime(at: date)
         let attributed = NSMutableAttributedString(
             string: text,
             attributes: [

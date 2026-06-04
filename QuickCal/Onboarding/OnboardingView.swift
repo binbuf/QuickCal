@@ -1,14 +1,20 @@
 import SwiftUI
+import AppKit
 
 struct OnboardingView: View {
     @Bindable var appState: AppState
     let onComplete: () -> Void
 
     @State private var step: Step = .welcome
+    @State private var now = Date()
+    @State private var isAnalog = false
+    @State private var previewClock = ClockPreferences()
+    private let ticker = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     enum Step {
         case welcome
         case configureMode
+        case launchAtLogin
     }
 
     var body: some View {
@@ -18,6 +24,16 @@ struct OnboardingView: View {
                 welcomeView
             case .configureMode:
                 configureModeView
+                    .onAppear { isAnalog = SystemClockState.isAnalog }
+                    .onReceive(ticker) { date in
+                        now = date
+                        isAnalog = SystemClockState.isAnalog
+                    }
+                    .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+                        isAnalog = SystemClockState.isAnalog
+                    }
+            case .launchAtLogin:
+                launchAtLoginView
             }
         }
         .frame(width: 520, height: 560)
@@ -69,17 +85,17 @@ struct OnboardingView: View {
                 .fixedSize(horizontal: false, vertical: true)
 
             modeCard(
-                mode: .analogCompanion,
-                title: "Analog Companion",
-                description: "Set the macOS clock to its tiny analog face, and let QuickCal be your primary digital readout. Customizable format via the right-click menu.",
-                systemImage: "clock"
-            )
-
-            modeCard(
                 mode: .calendarIcon,
                 title: "Calendar Icon",
                 description: "Keep the macOS clock the way you have it. QuickCal shows a small calendar icon — click it to open the flyout.",
                 systemImage: "calendar"
+            )
+
+            modeCard(
+                mode: .analogCompanion,
+                title: "Analog Companion",
+                description: "Set the macOS clock to its tiny analog face, and let QuickCal be your primary digital readout. Click the clock to see the calendar.",
+                systemImage: "clock"
             )
 
             if appState.clockMode == .analogCompanion {
@@ -96,13 +112,64 @@ struct OnboardingView: View {
 
                 Spacer()
 
-                Button("Get Started") {
-                    onComplete()
+                Button("Continue") {
+                    step = .launchAtLogin
                 }
                 .keyboardShortcut(.defaultAction)
                 .controlSize(.large)
                 .buttonStyle(.borderedProminent)
             }
+        }
+    }
+
+    // MARK: - Launch at login
+
+    private var launchAtLoginView: some View {
+        VStack(spacing: 24) {
+            Spacer()
+
+            Image(systemName: "power")
+                .font(.system(size: 56))
+                .foregroundStyle(.tint)
+                .symbolRenderingMode(.hierarchical)
+
+            Text("Start QuickCal automatically?")
+                .font(.largeTitle.bold())
+                .multilineTextAlignment(.center)
+
+            Text("Keep your calendar a click away every time you log in. You can change this anytime from the right-click menu.")
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: 400)
+
+            Spacer()
+
+            VStack(spacing: 12) {
+                Button("Yes, launch at login") {
+                    LaunchAtLoginManager.enable()
+                    onComplete()
+                }
+                .keyboardShortcut(.defaultAction)
+                .controlSize(.large)
+                .buttonStyle(.borderedProminent)
+
+                Button("Not now") {
+                    onComplete()
+                }
+                .controlSize(.large)
+                .buttonStyle(.plain)
+                .foregroundStyle(.secondary)
+            }
+
+            Spacer().frame(height: 4)
+
+            Button("Back") {
+                step = .configureMode
+            }
+            .controlSize(.small)
+            .buttonStyle(.plain)
+            .foregroundStyle(.secondary)
         }
     }
 
@@ -142,18 +209,57 @@ struct OnboardingView: View {
     }
 
     private var analogInstructions: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Set up the macOS clock")
-                .font(.subheadline.bold())
-
-            Text("Open System Settings → Control Center → Clock Options, and set Style to Analog. Then come back here.")
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-            Button("Open Control Center Settings") {
-                if let url = URL(string: "x-apple.systempreferences:com.apple.ControlCenter-Settings.extension") {
-                    NSWorkspace.shared.open(url)
+        VStack(alignment: .leading, spacing: 10) {
+            // Live preview of QuickCal's actual menu-bar readout.
+            VStack(alignment: .leading, spacing: 6) {
+                Text("This is how QuickCal will look in your menu bar:")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                HStack {
+                    Spacer()
+                    Text(previewClock.formattedTime(at: Date()).text)
+                        .font(.body.monospacedDigit())
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 4)
+                        .background(
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(Color.primary.opacity(0.08))
+                        )
+                    Spacer()
                 }
+            }
+
+            Divider()
+
+            if isAnalog {
+                Label {
+                    Text("Your macOS clock is set to Analog — you're all set.")
+                        .font(.callout)
+                } icon: {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundStyle(.green)
+                }
+            } else {
+                Text("Set up the macOS clock")
+                    .font(.subheadline.bold())
+
+                Text(SystemClockState.instructions)
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Button("Open Clock Settings") {
+                    SystemClockState.openClockSettings()
+                }
+
+                Label {
+                    Text("Until you switch the macOS clock to Analog, you'll see two clocks in your menu bar.")
+                        .font(.caption)
+                } icon: {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundStyle(.yellow)
+                }
+                .foregroundStyle(.secondary)
             }
         }
         .padding(12)

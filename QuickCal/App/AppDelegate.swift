@@ -226,12 +226,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func showAnalogTip() {
+        // Already analog — no need to nag.
+        guard !SystemClockState.isAnalog else { return }
+
         let alert = NSAlert()
         alert.messageText = "Tip: Use Analog Clock for the Best Experience"
-        alert.informativeText = "macOS doesn't allow hiding the system date/time or changing what happens when you click it. If you want a calendar to pop out when you click the menu bar clock, go to System Settings → Control Center → Clock and set the style to Analog."
+        alert.informativeText = "macOS doesn't allow hiding the system date/time or changing what happens when you click it. To make QuickCal your primary clock and avoid two clocks in the menu bar, switch the macOS clock to its analog face.\n\n\(SystemClockState.instructions)"
         alert.alertStyle = .informational
+        alert.addButton(withTitle: "Open Clock Settings")
         alert.addButton(withTitle: "Got It")
-        alert.runModal()
+        if alert.runModal() == .alertFirstButtonReturn {
+            SystemClockState.openClockSettings()
+        }
     }
 
     @objc private func toggleShowDate() {

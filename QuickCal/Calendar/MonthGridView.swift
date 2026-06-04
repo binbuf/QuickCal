@@ -64,7 +64,7 @@ struct MonthGridView: View {
 
     private var dayOfWeekHeaders: some View {
         LazyVGrid(columns: columns, spacing: 0) {
-            ForEach(viewModel.dayOfWeekSymbols, id: \.self) { symbol in
+            ForEach(Array(viewModel.dayOfWeekSymbols.enumerated()), id: \.offset) { _, symbol in
                 Text(symbol)
                     .font(.system(size: 11))
                     .foregroundStyle(.secondary)

@@ -6,16 +6,20 @@ struct CalendarFlyoutView: View {
     let preferences: ClockPreferences
     var dismiss: () -> Void
 
-    @State private var currentTime = Date()
-    @State private var flashState = false
-    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    /// Half-second resolution when flashing the separators (so the colon can
+    /// blink on the half-second boundary), otherwise a plain one-second tick.
+    private var tickInterval: TimeInterval {
+        preferences.flashDateSeparators ? 0.5 : 1.0
+    }
 
     var body: some View {
         VStack(spacing: 0) {
-            clockHeader
-                .padding(.horizontal, 20)
-                .padding(.top, 16)
-                .padding(.bottom, 12)
+            TimelineView(.alignedTo(tickInterval)) { context in
+                clockHeader(date: context.date)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 16)
+                    .padding(.bottom, 12)
+            }
 
             Divider()
                 .padding(.horizontal, 16)
@@ -33,17 +37,13 @@ struct CalendarFlyoutView: View {
                 .padding(.bottom, 12)
         }
         .frame(width: 340)
-        .onReceive(timer) { time in
-            currentTime = time
-            flashState.toggle()
-        }
     }
 
     // MARK: - Clock Header
 
-    private var clockHeader: some View {
+    private func clockHeader(date: Date) -> some View {
         VStack(alignment: .leading, spacing: 2) {
-            Text(timeAttributedString)
+            Text(timeAttributedString(for: date))
                 .font(.system(size: 44, weight: .light, design: .default))
                 .monospacedDigit()
                 .foregroundStyle(.primary)
@@ -58,7 +58,7 @@ struct CalendarFlyoutView: View {
                     appState.viewMode = .day
                 }
             } label: {
-                Text(currentTime, format: .dateTime.weekday(.wide).month(.wide).day().year())
+                Text(date, format: .dateTime.weekday(.wide).month(.wide).day().year())
                     .font(.system(size: 13))
                     .foregroundStyle(.secondary)
             }
@@ -67,9 +67,8 @@ struct CalendarFlyoutView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private var timeAttributedString: AttributedString {
-        _ = currentTime  // tie this property to the per-second tick
-        let (text, hideColons) = preferences.formattedTimeOnly(flashState: flashState)
+    private func timeAttributedString(for date: Date) -> AttributedString {
+        let (text, hideColons) = preferences.formattedTimeOnly(at: date)
         var attributed = AttributedString(text)
         if hideColons {
             var idx = attributed.startIndex
@@ -127,5 +126,32 @@ struct CalendarFlyoutView: View {
             insertion: .scale(scale: 1.4).combined(with: .opacity),
             removal: .scale(scale: 0.6).combined(with: .opacity)
         )
+    }
+}
+
+/// A timeline schedule whose ticks land on wall-clock boundaries (e.g. exactly on
+/// each whole or half second) rather than drifting from the moment the view first
+/// appeared. This keeps the rendered time changing in lock-step with the OS clock.
+struct AlignedTimelineSchedule: TimelineSchedule {
+    let interval: TimeInterval
+
+    func entries(from startDate: Date, mode: TimelineScheduleMode) -> AnyIterator<Date> {
+        let step = interval
+        let start = startDate.timeIntervalSinceReferenceDate
+        // First tick: the next boundary strictly after `startDate`.
+        var tick = (start / step).rounded(.down) * step
+        if tick <= start { tick += step }
+        return AnyIterator {
+            let date = Date(timeIntervalSinceReferenceDate: tick)
+            tick += step
+            return date
+        }
+    }
+}
+
+extension TimelineSchedule where Self == AlignedTimelineSchedule {
+    /// Ticks aligned to wall-clock boundaries of length `interval` seconds.
+    static func alignedTo(_ interval: TimeInterval) -> AlignedTimelineSchedule {
+        AlignedTimelineSchedule(interval: interval)
     }
 }

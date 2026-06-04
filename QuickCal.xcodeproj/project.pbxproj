@@ -19,6 +19,7 @@
 		8951AFD9E210F31F4F277CDF /* QuickCalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA107872FEE90FF676F29F7C /* QuickCalApp.swift */; };
 		8ABF0162217AE9C4EA5347A3 /* DecadePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C9AA7590714269B14AC9D5 /* DecadePickerView.swift */; };
 		8EDA02DBC2171280690BF3D2 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609B8BAED29F8FD4A13347BF /* CalendarHeaderView.swift */; };
+		9F5836D67E8FE291A7B98B38 /* SystemClockState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DFE0482E2AF992A0FB6817 /* SystemClockState.swift */; };
 		9F6E20D23D760BC62B34634A /* MonthGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56881F633B96754A0D3FEB3 /* MonthGridView.swift */; };
 		A5C983CE5A15FB570749B2AD /* ClockPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0957801C766BB6EBDBB9A2E7 /* ClockPreferences.swift */; };
 		B44E5247FF8DD1B29B27E247 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654EEBF77DB2CFE38FFEF9A0 /* AppState.swift */; };
@@ -43,6 +44,7 @@
 		5D62EF2ADA4FC3938B8BD70A /* QuickCal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickCal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609B8BAED29F8FD4A13347BF /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
 		654EEBF77DB2CFE38FFEF9A0 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		79DFE0482E2AF992A0FB6817 /* SystemClockState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemClockState.swift; sourceTree = "<group>"; };
 		977526146285E41FBE0B0363 /* LaunchAtLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginManager.swift; sourceTree = "<group>"; };
 		9F9862B25077F475D75F9DF1 /* CalendarFlyoutPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFlyoutPanel.swift; sourceTree = "<group>"; };
 		AA107872FEE90FF676F29F7C /* QuickCalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickCalApp.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			children = (
 				0957801C766BB6EBDBB9A2E7 /* ClockPreferences.swift */,
 				FA06AC743F811521FAC1A48F /* ClockStatusItem.swift */,
+				79DFE0482E2AF992A0FB6817 /* SystemClockState.swift */,
 			);
 			path = Clock;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				1DEC1D87669B852879ED0805 /* OnboardingView.swift in Sources */,
 				F11EFFCF7399849B85BD42C6 /* OnboardingWindow.swift in Sources */,
 				8951AFD9E210F31F4F277CDF /* QuickCalApp.swift in Sources */,
+				9F5836D67E8FE291A7B98B38 /* SystemClockState.swift in Sources */,
 				0F884F247DB8BE2862679C9E /* UninstallManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

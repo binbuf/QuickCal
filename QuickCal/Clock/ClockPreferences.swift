@@ -92,13 +92,25 @@ final class ClockPreferences {
         }
     }
 
-    func formattedTime(flashState: Bool) -> (text: String, hideColons: Bool) {
-        let text = buildDateFormatter().string(from: Date())
-        return (text, flashDateSeparators && flashState)
+    /// Whether the time separators should be hidden at `date` for the flash effect.
+    /// Hidden during the back half of each whole second so the blink toggles on the
+    /// half-second boundary, in lock-step with the OS clock. No-op unless enabled.
+    func separatorsHidden(at date: Date) -> Bool {
+        guard flashDateSeparators else { return false }
+        let fraction = date.timeIntervalSinceReferenceDate.truncatingRemainder(dividingBy: 1.0)
+        return fraction > 0.25 && fraction < 0.75
     }
 
-    func formattedTimeOnly(flashState: Bool) -> (text: String, hideColons: Bool) {
-        let text = buildTimeFormatter().string(from: Date())
-        return (text, flashDateSeparators && flashState)
+    /// Date + time string for an explicit `date` (driven by the aligned clock tick)
+    /// so the displayed value matches the wall clock.
+    func formattedTime(at date: Date) -> (text: String, hideColons: Bool) {
+        let text = buildDateFormatter().string(from: date)
+        return (text, separatorsHidden(at: date))
+    }
+
+    /// Time-only string for an explicit `date`, with the same alignment guarantees.
+    func formattedTimeOnly(at date: Date) -> (text: String, hideColons: Bool) {
+        let text = buildTimeFormatter().string(from: date)
+        return (text, separatorsHidden(at: date))
     }
 }
