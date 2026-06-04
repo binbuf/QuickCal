@@ -97,6 +97,7 @@ jobs:
           cp -R "build/Build/Products/Release/QuickCal.app" "$STAGE/"
           create-dmg \
             --volname "QuickCal ${VERSION}" \
+            --background "${GITHUB_WORKSPACE}/Scripts/dmg/dmg-background.png" \
             --window-pos 200 120 \
             --window-size 600 400 \
             --icon-size 100 \
