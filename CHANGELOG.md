@@ -5,6 +5,20 @@ All notable changes to QuickCal are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-06-04
+
+### Fixed
+- **Missing app icon** — every entry in the `AppIcon` asset catalog carried a
+  non-standard `"platform"` key, which caused `actool` on Xcode 26 / macOS 26 to
+  silently discard the whole icon (no `Assets.car`, no `CFBundleIconName`). Removed
+  the key so the icon compiles into the bundle again.
+
+### Documentation
+- Added an **Install → Download** section to the README covering the first-open
+  Gatekeeper step for the un-notarized DMG (`xattr -dr com.apple.quarantine …`, plus
+  the System Settings → Privacy & Security alternative and its caveats).
+- Clarified the published GitHub Release notes with the same first-open guidance.
+
 ## [0.2.0] - 2026-06-04
 
 ### Added
@@ -50,5 +64,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   clock) and Calendar Icon.
 - First-run onboarding and an uninstaller.
 
+[0.2.1]: https://github.com/binbuf/QuickCal/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/binbuf/QuickCal/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/binbuf/QuickCal/releases/tag/v0.1.0

@@ -124,9 +124,19 @@ jobs:
           body: |
             QuickCal ${{ steps.version.outputs.version }}
 
-            Status-bar macOS app. Ad-hoc signed; on first launch run:
+            Status-bar macOS app for Apple Silicon.
+
+            **Install:** open the DMG and drag QuickCal into Applications.
+
+            **First open:** this build is ad-hoc signed but not notarized, so macOS
+            may say *"QuickCal is damaged and can't be opened."* The app is fine —
+            that's just Gatekeeper blocking an un-notarized download. Clear it once:
 
                 xattr -dr com.apple.quarantine /Applications/QuickCal.app
+
+            then double-click QuickCal as usual. (System Settings → Privacy &
+            Security → "Open Anyway" may also work, but is often not offered for the
+            "damaged" message — the command above is the reliable fix.)
 
             SHA-256 checksum is in the attached `.sha256` file.
           files: |

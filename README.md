@@ -1,10 +1,10 @@
 # QuickCal
 
-**Click your menu bar clock. Get a calendar.**
+**A tiny macOS menu bar calendar**
 
-A tiny macOS menu bar calendar. Expands to a full month calendar with your agenda. Native calendar opens your events with one click away.
+Expands to a full month calendar with your agenda. Native calendar opens your events with one click away.
 
-![Calendar flyout showing month grid and agenda](docs/app.png)
+<img src="docs/app.png" width="35%" alt="Calendar flyout showing month grid and agenda">
 
 ## What it does
 
@@ -19,10 +19,12 @@ A tiny macOS menu bar calendar. Expands to a full month calendar with your agend
 macOS doesn't let third-party apps hide the system clock, so QuickCal offers two ways to fit into your menu bar:
 
 ### Calendar Icon *(default)*
+
 A small `calendar` SF Symbol sits in your menu bar. Your system clock stays exactly as you have it. Clean, minimal, zero interference. Best if you just want the flyout without changing anything.
 
 ### Analog Companion
-QuickCal replaces the system clock with its own **fully configurable digital readout** — 12/24h, seconds, day of week, date, flashing separators. You set the system clock style to **Analog** (a tiny clock face), which naturally takes up less space and recedes visually. QuickCal becomes your primary time display, and clicking it opens the flyout.
+
+QuickCal can be configured to replace the system clock with its own **fully configurable digital readout** — 12/24h, seconds, day of week, date, flashing separators. You set the system clock style to **Analog** (a tiny clock face), which naturally takes up less space and recedes visually. QuickCal becomes your primary time display, and clicking it opens the flyout.
 
 > To enable Analog Companion: right-click the QuickCal clock → **Clock Style → Analog Companion**, then open **System Settings → Control Center → Clock Options** and set Style to Analog.
 
@@ -36,6 +38,28 @@ The onboarding flow walks you through this automatically on first launch.
 - [xcodegen](https://github.com/yonaskolb/XcodeGen): `brew install xcodegen`
 
 ## Install
+
+### Download
+
+1. Download the latest `QuickCal-<version>-apple-silicon.dmg` from [Releases](https://github.com/binbuf/QuickCal/releases).
+2. Open the DMG and drag **QuickCal** into **Applications**.
+
+**First open — clearing the "damaged" warning.** QuickCal is ad-hoc signed but not
+yet notarized by Apple, so the first time you open a downloaded copy macOS may say
+*"QuickCal is damaged and can't be opened."* The app is fine — this is just
+Gatekeeper blocking an un-notarized download. Clear it once and it never returns:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/QuickCal.app
+```
+
+Then double-click QuickCal as usual.
+
+> You can also try **System Settings → Privacy & Security**, scroll to the Security
+> section, and click **Open Anyway** if it's offered. Note that for the *"damaged"*
+> message macOS often doesn't show that button (it's meant for the milder
+> "unidentified developer" prompt), so the Terminal command above is the reliable
+> fix. Right-click → Open no longer bypasses this on recent macOS.
 
 ### From source
 
@@ -69,12 +93,6 @@ No Accessibility permission required. No background agents. Just a status item.
 |---|---|
 | Left-click the icon | Open/close calendar flyout |
 | Right-click the icon | Context menu (Clock Style, Launch at Login, Uninstall, Quit) |
-| Click the month/year header | Zoom out to month picker |
-| Click a month | Zoom out to decade picker |
-| Click a year or month cell | Zoom back in |
-| Arrow keys | Navigate the calendar grid |
-| Escape | Close the flyout |
-| Click the date subtitle | Jump back to today if you've navigated away |
 
 ## Uninstall
 
